@@ -5,7 +5,7 @@
     name: '{{ item }}'
     state: latest
   with_items:
-    - httpd
+    - httpie
     - haproxy
 
 - name: configure haproxy
@@ -15,11 +15,8 @@
 
 - name: enable and start services from haproxy
   service: 
-    name: '{{ item }}'
+    name: haproxy
     state: restarted
     enabled: yes
-  with_items:
-    - httpd
-    - haproxy
 
  
