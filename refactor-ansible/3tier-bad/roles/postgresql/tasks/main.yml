@@ -1,0 +1,20 @@
+---
+# tasks file for postgresql
+- name: install Postgresql
+  yum:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - postgresql
+    - postgresql-server
+
+- name: Create initial Database
+  command: "postgresql-setup initdb"
+  ignore_errors: yes 
+  notify: restart postgresql
+
+- name: Enable postgresql
+  service:
+    name: postgresql
+    state: started
+    enabled: yes

@@ -1,0 +1,25 @@
+---
+# tasks file for tomcat
+- name: Install tomcat
+  yum: 
+    name: tomcat
+    state: latest
+
+- name: Create necessary path
+  file: 
+    path: /usr/share/tomcat/webapps/ROOT
+    state: directory
+
+- name: Configure Tomcat
+  template:
+    src: index.html.j2
+    dest: /usr/share/tomcat/webapps/ROOT/index.html
+    mode: 0644
+
+- name: Tomcat services
+  service:
+     name: tomcat
+     state: started
+     enabled: yes
+
+

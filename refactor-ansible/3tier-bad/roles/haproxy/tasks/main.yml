@@ -1,0 +1,25 @@
+---
+# tasks file for haproxy
+- name: Install necessary packages
+  yum:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - httpd
+    - haproxy
+
+- name: configure haproxy
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+
+- name: enable and start services from haproxy
+  service: 
+    name: '{{ item }}'
+    state: restarted
+    enabled: yes
+  with_items:
+    - httpd
+    - haproxy
+
+ 

@@ -1,0 +1,32 @@
+---
+- name: Main configuration for all hosts
+  hosts: all
+  become: yes
+  tasks:
+  
+  - name: enable repos
+    template:
+      src: ./open_three-tier-app.repo
+      dest: /etc/yum.repos.d/open_three-tier-app.repo
+      mode: 0644
+
+- name: Deploy frontend 
+  hosts: frontends
+  become: yes
+  roles:
+    - haproxy
+
+- name: deploy aplication on app nodes
+  hosts: apps
+  become: yes
+  roles:
+    - tomcat
+    - httpd
+    - deploy-app
+
+- name: deploy postgres
+  become: yes
+  hosts: appdbs
+  roles:
+  - postgresql 
+  
