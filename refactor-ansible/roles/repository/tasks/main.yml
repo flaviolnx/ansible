@@ -1,0 +1,7 @@
+---
+# tasks file for repository
+- name: Configure repository
+  template: 
+     src: open_three-tier-app.repo.j2
+     dest: /etc/yum.repos.d/ansible.repo 
+     mode: 0664
