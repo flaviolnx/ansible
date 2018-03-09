@@ -1,0 +1,10 @@
+---
+- name: Install Active Directory On Windows environment hosts
+  hosts: windows
+  become: yes
+  tasks:
+
+  - name: including AD role
+    include_vars: file="my_ad_vars.yml"
+  - roles:
+      - win_ad_install

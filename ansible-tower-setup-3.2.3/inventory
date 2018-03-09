@@ -1,0 +1,36 @@
+[tower]
+tower1.93fe.internal public_host_name=tower1.93fe.example.opentlc.com ssh_host=ec2-35-173-148-107.compute-1.amazonaws.com
+tower2.93fe.internal public_host_name=tower2.93fe.example.opentlc.com ssh_host=ec2-35-170-212-174.compute-1.amazonaws.com
+tower3.93fe.internal public_host_name=tower3.93fe.example.opentlc.com ssh_host=ec2-35-172-204-28.compute-1.amazonaws.com
+
+
+[database]
+support1.93fe.internal ssh_host=ec2-35-169-163-50.compute-1.amazonaws.com
+
+
+[all:vars]
+timeout=60
+ansible_become=yes
+ansible_ssh_user=ec2-user
+
+admin_password='r3dh4t1!'
+
+pg_host='support1.93fe.internal'
+pg_port='5432'
+
+pg_database='awx'
+pg_username='awx'
+pg_password='r3dh4t1!'
+
+rabbitmq_port=5672
+rabbitmq_vhost=tower
+rabbitmq_username=tower
+rabbitmq_password='r3dh4t1!'
+rabbitmq_cookie=cookiemonster
+
+# Needs to be true for fqdns and ip addresses
+rabbitmq_use_long_name=true
+
+# Isolated Tower nodes automatically generate an RSA key for authentication;
+# To disable this behavior, set this value to false
+# isolated_key_generation=true

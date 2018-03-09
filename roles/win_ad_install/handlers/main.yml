@@ -1,0 +1,5 @@
+---
+# handlers file for win_ad_install
+- name: Reboot
+  win_reboot:
+  when: reboot_required == true
